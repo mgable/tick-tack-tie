@@ -3,11 +3,16 @@ import Square from "./Square.js";
 import './Board.css';
 
 
-const Board = ({message, onClick, squares}) => {
-	console.info(message, onClick, squares);
+const Board = ({message, onClick, squares, history, onRewind, completed, turn}) => {
+	var disabled = false;
 	const renderSquare = (idx) => {
 		return ( <Square onClick={() => onClick(idx)} value={squares[idx]}/> )
 	}
+
+	if (turn === 0 || completed){
+		disabled = true;
+	}
+
 
 	return (
 		<div className= "board-holder">
@@ -29,6 +34,7 @@ const Board = ({message, onClick, squares}) => {
 					{renderSquare(8)}
 				</div>
 			</div>
+			<button className="rewind" disabled={disabled} onClick={onRewind}>Undo</button>
 		</div>
 	)
 }

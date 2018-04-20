@@ -12,3 +12,7 @@
 .board-row {
 	display: flex;
 }
+
+.rewind {
+	margin: 10px 0 0 0;
+}

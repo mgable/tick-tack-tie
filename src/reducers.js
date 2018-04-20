@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import { SELECT_SQUARE } from './actions';
+import { SELECT_SQUARE, REWIND_HISTORY } from './actions';
 
 const lines = [ 
 	[0,1,2],
@@ -12,13 +12,26 @@ const lines = [
 	[2,4,6]
 ];
  
-const initialState = {squares: new Array(9).fill(null), turn: 0, winner: false, completed: false, message: "Click any square to start"}
+const initialState = {history: [], squares: new Array(9).fill(null), turn: 0, winner: false, completed: false, message: "Click any square to start"}
  
 const app = (state = initialState, action) => {
 	switch(action.type){
 		case SELECT_SQUARE: return selectSquare(state, action)
+		case REWIND_HISTORY: return rewind(state, action)
 		default: return state
 	}  
+}
+
+const rewind = (state, action) => {
+	if (state.turn > 0 && !state.completed){
+		let history = state.history.slice(0),
+			turn = state.turn - 1,
+			squares = history.pop()
+		
+		return Object.assign({}, state, {history, squares, turn});
+	} else {
+		return state;
+	}
 }
 
 const selectSquare = (state, action) => {
@@ -27,8 +40,10 @@ const selectSquare = (state, action) => {
 			turn = state.turn + 1,
 			winner,
 			completed,
-			message;
+			message,
+			history = state.history.slice(0);
 		
+		history.push(state.squares.slice(0));
 		squares[action.idx] = state.turn % 2 === 0 ? "X" : "O";
 		winner = calculateWinner(squares);
 		completed = winner || (turn === squares.length);
@@ -41,7 +56,7 @@ const selectSquare = (state, action) => {
 			message = "The game continues";
 		}
 
-		return Object.assign({}, state, {squares, turn, winner, completed, message});
+		return Object.assign({}, state, {squares, turn, winner, completed, message, history});
 	} else {
 		return state;
 	}
