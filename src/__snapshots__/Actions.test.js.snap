@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Actions correctly makes rewind history 1`] = `
+Object {
+  "type": "REWIND_HISTORY",
+}
+`;
+
+exports[`Actions correctly makes select Square 1`] = `
+Object {
+  "idx": 1,
+  "type": "SELECT_SQUARE",
+}
+`;

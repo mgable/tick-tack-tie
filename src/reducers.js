@@ -12,7 +12,7 @@ const lines = [
 	[2,4,6]
 ];
  
-const initialState = {history: [], squares: new Array(9).fill(null), turn: 0, winner: false, completed: false, message: "Click any square to start"}
+export const initialState = {history: [], squares: new Array(9).fill(null), turn: 0, winner: false, completed: false, message: "Click any square to start"}
  
 const app = (state = initialState, action) => {
 	switch(action.type){
