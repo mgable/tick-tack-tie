@@ -9,7 +9,7 @@ class Game extends React.Component {
 	}
 
 	selectSquare (idx){
-		if (! this.state.winner && !this.state.completed){
+		if (! this.state.winner && !this.state.completed && !this.state.squares[idx]){ // and square has not aready been selected
 			let squares = this.state.squares.slice(0),
 				turn = this.state.turn + 1,
 				winner,
