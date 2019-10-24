@@ -1,4 +1,4 @@
-This was a project I gave myself to learn React.
+This was a project I gave myself to learn React and Redux
 
 
 ### Create React App
